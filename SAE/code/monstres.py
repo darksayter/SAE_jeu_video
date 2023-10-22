@@ -9,6 +9,12 @@ class Monstre(object):
 
     def __repr__(self) -> str:
         return f"Monstre({self.x}, {self.y}, {self.hp}, {self.degat})"
+    
+    def getX(self):
+        return self.x
+    
+    def getY(self):
+        return self.y
         
     def getHp(self):
         return self.hp
@@ -27,6 +33,12 @@ class Monstre(object):
     
     def getHauteurImage(self):
         return 100
+    
+    def setX(self, x):
+        self.x = x
+        
+    def setY(self, y):
+        self.y = y
     
     def setHp(self, hp):
         self.hp = hp

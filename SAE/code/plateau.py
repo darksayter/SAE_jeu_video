@@ -1,3 +1,4 @@
+import random
 import pygame
 import sys
 from dé import *
@@ -5,6 +6,7 @@ from case import Case
 from bouton import Bouton
 from joueur import Joueur
 from monstres import Monstre
+from combat import Combat
 
 
 def plateau():
@@ -82,6 +84,12 @@ def plateau():
 
     # Initialisation de la liste des boutons
     liste_boutons = []
+    
+    # Initialisation de la listes de monstres
+    mobs = []
+    
+    # Initialisation du résultat du combat
+    resultat_combat = None
 
     # Initialisation des perso pour tests
     j1 : Joueur = Joueur("joueur_1", case1.getX(), case1.getY())
@@ -93,9 +101,32 @@ def plateau():
     mob2 : Monstre = Monstre(case3.getX(),case3.getY())
     mob3 : Monstre = Monstre(case4.getX(),case4.getY())
     
-    def genereMobs():
-        pass
+    def genereMobs(plateau, mobs, nombre_de_mobs):
+        # Réinitialise la liste des monstres
+        mobs.clear()
 
+        # Créez une liste de cases disponibles pour générer des monstres (à l'exception de la case1)
+        cases_disponibles = []
+        for i in range(largueur):
+            for j in range(hauteur):
+                if plateau[j][i] is not None and plateau[j][i] != case1:
+                    cases_disponibles.append(plateau[j][i])
+
+        # Générer le nombre de monstres souhaité
+        for _ in range(nombre_de_mobs):
+            # Vérifiez si des cases sont disponibles
+            if cases_disponibles:
+                # Choisissez une case aléatoire parmi les cases disponibles
+                case_aleatoire = random.choice(cases_disponibles)
+
+                # Créez un monstre et placez-le sur la case aléatoire
+                monstre = Monstre(case_aleatoire.getX(), case_aleatoire.getY())
+
+                # Ajoutez le monstre à la liste des monstres
+                mobs.append(monstre)
+
+        return mobs
+            
     case1.setType("Joueur")
 
     def getCase(x,y) -> Case:
@@ -147,49 +178,64 @@ def plateau():
                                 fenetre.blit(pygame.image.load("IMG/de/de_3.png"), (i * taille_case, j * taille_case))                            
 
 
-    def deplacement(case : Case,joueur: Joueur):
-        if resultat_de == 1 :
-            if case.getId()+1 > 32:
-                temp = case.getId()+1
-                temp = temp - 32
-                joueur.setX(case.getXSpecificCase(temp))
-                joueur.setY(case.getYSpecificCase(temp))
-                case.setSpecificCase(temp)
-                case.setType("")
-            else:
-                joueur.setX(case.getXSpecificCase(case.getId()+1))
-                joueur.setY(case.getYSpecificCase(case.getId()+1))
-                case.setSpecificCase(case.getId()+1)
-                case.setType("")
-                
+    def collisionJoueurMonstre(joueur, monstre):
+        if joueur.getX() == monstre.getX() and joueur.getY() == monstre.getY():
+            # Collision détectée, lancez la fonction de combat directement
+            # Assurez-vous que votre fonction de combat fait tout le nécessaire
+            resultat_combat = Combat(joueur, monstre)  # Vous devez définir cette fonction de combat
+            if resultat_combat == "victoire":
+                # Gérer la victoire du joueur
+                print("Le joueur a gagné le combat.")
+            elif resultat_combat == "defaite":
+                # Gérer la défaite du joueur
+                print("Le joueur a perdu le combat.")
 
-        elif resultat_de == 2 :
-            if case.getId()+2 > 32:
-                temp = case.getId()+2
+    def deplacement(case: Case, joueur: Joueur):
+        if resultat_de == 1:
+            if case.getId() + 1 > 32:
+                temp = case.getId() + 1
                 temp = temp - 32
                 joueur.setX(case.getXSpecificCase(temp))
                 joueur.setY(case.getYSpecificCase(temp))
                 case.setSpecificCase(temp)
                 case.setType("")
+                collisionJoueurMonstre(joueur, monstre)  # Vérifiez la collision après le déplacement
             else:
-                joueur.setX(case.getXSpecificCase(case.getId()+2))
-                joueur.setY(case.getYSpecificCase(case.getId()+2))
-                case.setSpecificCase(case.getId()+2)
+                joueur.setX(case.getXSpecificCase(case.getId() + 1))
+                joueur.setY(case.getYSpecificCase(case.getId() + 1))
+                case.setSpecificCase(case.getId() + 1)
                 case.setType("")
-            
-        elif resultat_de == 3 :
-            if case.getId()+3 > 32:
-                temp = case.getId()+3
+                collisionJoueurMonstre(joueur, monstre)  # Vérifiez la collision après le déplacement
+        if resultat_de == 2:
+            if case.getId() + 2 > 32:
+                temp = case.getId() + 2
                 temp = temp - 32
                 joueur.setX(case.getXSpecificCase(temp))
                 joueur.setY(case.getYSpecificCase(temp))
                 case.setSpecificCase(temp)
                 case.setType("")
+                collisionJoueurMonstre(joueur, monstre)  # Vérifiez la collision après le déplacement
             else:
-                joueur.setX(case.getXSpecificCase(case.getId()+3))
-                joueur.setY(case.getYSpecificCase(case.getId()+3))
-                case.setSpecificCase(case.getId()+3)
+                joueur.setX(case.getXSpecificCase(case.getId() + 2))
+                joueur.setY(case.getYSpecificCase(case.getId() + 2))
+                case.setSpecificCase(case.getId() + 2)
                 case.setType("")
+                collisionJoueurMonstre(joueur, monstre)  # Vérifiez la collision après le déplacement
+        if resultat_de == 3:
+            if case.getId() + 3 > 32:
+                temp = case.getId() + 3
+                temp = temp - 32
+                joueur.setX(case.getXSpecificCase(temp))
+                joueur.setY(case.getYSpecificCase(temp))
+                case.setSpecificCase(temp)
+                case.setType("")
+                collisionJoueurMonstre(joueur, monstre)  # Vérifiez la collision après le déplacement
+            else:
+                joueur.setX(case.getXSpecificCase(case.getId() + 3))
+                joueur.setY(case.getYSpecificCase(case.getId() + 3))
+                case.setSpecificCase(case.getId() + 3)
+                case.setType("")
+                collisionJoueurMonstre(joueur, monstre)  # Vérifiez la collision après le déplacement
 
     # Boucle pour afficher la fenêtre
     while True:
@@ -221,12 +267,16 @@ def plateau():
             j1.setMouvement(False)
             j2.setMouvement(False)
             bouton.reset_clic()
-
-            # Ajoutez des déclarations print pour vérifier le clic et la réinitialisation
-            print("Clic détecté pour le bouton :", bouton.est_clique(event))
-            print("État du clic du bouton après réinitialisation :", bouton.clic_detecte)
             
             pygame.display.flip()
+            
+        if not mobs:
+            # Si la liste des monstres est vide, générez 5 monstres
+            mobs = genereMobs(plateau, mobs, 5)
+            
+        for monstre in mobs:
+            collisionJoueurMonstre(j1, monstre)  # Vérifiez la collision pour chaque monstre et le joueur 1
+            collisionJoueurMonstre(j2, monstre)  # Vérifiez la collision pour chaque monstre et le joueur 2
         
         # Initialisation du fond de la fenetre en gris clair
         fenetre.fill(GRIS)
@@ -236,6 +286,13 @@ def plateau():
 
         # Affichage du plateau
         creationPlateau(plateau)
+        
+        for monstre in mobs:
+            x = monstre.getX()
+            y = monstre.getY()
+            image = monstre.getImage()
+            fenetre.blit(pygame.image.load(image), (x * taille_case, y * taille_case))
+
             
         pygame.time.delay(20)
             
@@ -254,7 +311,7 @@ def plateau():
         # Appeler la fonction pour détecter les clics des boutons
         # clicBouton(plateau)
         
-    return en_cours
+        return en_cours
         
 if __name__ == '__main__':
     plateau()

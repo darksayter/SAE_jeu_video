@@ -4,7 +4,7 @@ from joueur import *
 from monstres import *
 from bouton import *
 
-def combat():
+def Combat():
 
     en_cours = True
     
@@ -88,4 +88,4 @@ def combat():
     return en_cours
 
 if __name__ == "__main__":
-    combat()
+    Combat()
