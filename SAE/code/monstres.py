@@ -13,6 +13,9 @@ class Monstre(object):
     def getHp(self):
         return self.hp
     
+    def getVieMax(self):
+        return 30
+    
     def getDegat(self):
         return self.degat
     
@@ -21,6 +24,9 @@ class Monstre(object):
     
     def getImage(self):
         return self.image
+    
+    def getHauteurImage(self):
+        return 100
     
     def setHp(self, hp):
         self.hp = hp

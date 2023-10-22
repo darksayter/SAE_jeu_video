@@ -1,4 +1,3 @@
-import random
 import pygame
 import sys
 from dé import *
@@ -16,7 +15,6 @@ def plateau():
     pygame.init()
 
     # Définition des couleurs
-    BLANC = (255, 255, 255)
     NOIR = (0, 0, 0)
     ORANGE = (255, 165, 0)
     GRIS = (200, 200, 200)

@@ -25,6 +25,9 @@ class Joueur(object):
     def getHp(self):
         return self.hp
     
+    def getVieMax(self):
+        return 50
+    
     def getDegat(self):
         return self.degat
     
@@ -39,6 +42,9 @@ class Joueur(object):
     
     def getImage(self):
         return self.image
+    
+    def getHauteurImage(self):
+        return 100
         
     def setX(self, x):
         self.x = x
