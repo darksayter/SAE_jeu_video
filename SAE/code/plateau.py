@@ -10,8 +10,6 @@ from monstres import Monstre
 
 def plateau():
     
-    en_cours = True
-    
     # Initialisation de Pygame
     pygame.init()
 
@@ -292,8 +290,6 @@ def plateau():
         
         # Appeler la fonction pour détecter les clics des boutons
         # clicBouton(plateau)
-        
-        return en_cours
         
 if __name__ == '__main__':
     plateau()
