@@ -88,7 +88,6 @@ def plateau():
     # Initialisation des perso pour tests
     j1 : Joueur = Joueur("joueur_1", case1.getX(), case1.getY())
     j2 : Joueur = Joueur("joueur_2", case1.getX(), case1.getY())
-    j2.setImage("IMG/alex.png")
     
     # Initialisation des mobs pour tests
     mob1 : Monstre = Monstre(case2.getX(),case2.getY())
@@ -150,8 +149,6 @@ def plateau():
                                 fenetre.blit(pygame.image.load(j2.getImage()), (i * taille_case, j * taille_case))
                         elif case_temp.getType() == "Joueur":
                             temp_joueur = getJoueur(j,i)
-                            if temp_joueur.getImage() == j2.getImage():
-                                print("RATIO")
                             pygame.draw.rect(fenetre, NOIR, (i * taille_case, j * taille_case, taille_case, taille_case))
                             fenetre.blit(pygame.image.load(temp_joueur.getImage()), (i * taille_case, j * taille_case))
                         else:
@@ -163,7 +160,6 @@ def plateau():
                         liste_boutons.append(boutonDe)
                     if plateau[j][i] == 5:
                         fenetre.blit(pygame.image.load("IMG/de/de_vide.png"), (i * taille_case, j * taille_case))
-                        # Pas encore opérationnel (NameError: name 'resultat_de' is not defined)
                         if boutonDe.est_clique(event):
                             if resultat_de == 1:
                                 fenetre.blit(pygame.image.load("IMG/de/de_1.png"), (i * taille_case, j * taille_case))
