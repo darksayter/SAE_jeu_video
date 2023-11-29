@@ -11,7 +11,9 @@ from potion_poison import *
 def main():
     menu_princ()
     menu_pers()
+    print("test")
     plateau()
+    print("test1")
     tour=0
     
 if __name__ == '__main__':

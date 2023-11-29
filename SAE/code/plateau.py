@@ -97,31 +97,31 @@ def plateau():
     mob2 : Monstre = Monstre(case3.getX(),case3.getY())
     mob3 : Monstre = Monstre(case4.getX(),case4.getY())
     
-    def genereMobs(plateau, mobs, nombre_de_mobs):
-        # Réinitialise la liste des monstres
-        mobs.clear()
+    # def genereMobs(plateau, mobs, nombre_de_mobs):
+    #     # Réinitialise la liste des monstres
+    #     mobs.clear()
 
-        # Créez une liste de cases disponibles pour générer des monstres (à l'exception de la case1)
-        cases_disponibles = []
-        for i in range(largueur):
-            for j in range(hauteur):
-                if plateau[j][i] is not None and plateau[j][i] != case1:
-                    cases_disponibles.append(plateau[j][i])
+    #     # Créez une liste de cases disponibles pour générer des monstres (à l'exception de la case1)
+    #     cases_disponibles = []
+    #     for i in range(largueur):
+    #         for j in range(hauteur):
+    #             if plateau[j][i] is not None and plateau[j][i] != case1:
+    #                 cases_disponibles.append(plateau[j][i])
 
-        # Générer le nombre de monstres souhaité
-        for _ in range(nombre_de_mobs):
-            # Vérifiez si des cases sont disponibles
-            if cases_disponibles:
-                # Choisissez une case aléatoire parmi les cases disponibles
-                case_aleatoire = random.choice(cases_disponibles)
+    #     # Générer le nombre de monstres souhaité
+    #     for _ in range(nombre_de_mobs):
+    #         # Vérifiez si des cases sont disponibles
+    #         if cases_disponibles:
+    #             # Choisissez une case aléatoire parmi les cases disponibles
+    #             case_aleatoire = random.choice(cases_disponibles)
 
-                # Créez un monstre et placez-le sur la case aléatoire
-                monstre = Monstre(case_aleatoire.getX(), case_aleatoire.getY())
+    #             # Créez un monstre et placez-le sur la case aléatoire
+    #             monstre = Monstre(case_aleatoire, case_aleatoire)
 
-                # Ajoutez le monstre à la liste des monstres
-                mobs.append(monstre)
+    #             # Ajoutez le monstre à la liste des monstres
+    #             mobs.append(monstre)
 
-        return mobs
+    #     return mobs
             
 
     case1.setType("Joueur")
@@ -252,9 +252,9 @@ def plateau():
             
             pygame.display.flip()
             
-        if not mobs:
+        # if not mobs:
             # Si la liste des monstres est vide, générez 5 monstres
-            mobs = genereMobs(plateau, mobs, 5)
+            # mobs = genereMobs(plateau, mobs, 5)
         
         # Initialisation du fond de la fenetre en gris clair
         fenetre.fill(GRIS)
@@ -265,11 +265,15 @@ def plateau():
         # Affichage du plateau
         creationPlateau(plateau)
         
-        for monstre in mobs:
-            x = monstre.getX()
-            y = monstre.getY()
-            image = monstre.getImage()
-            fenetre.blit(pygame.image.load(image), (x * taille_case, y * taille_case))
+        # for monstre in mobs:
+        #     x = monstre.getX()
+        #     y = monstre.getY()
+        #     image = monstre.getImage()
+        #     fenetre.blit(pygame.image.load(image), (x * taille_case, y * taille_case))
+
+
+
+
 
             
         pygame.time.delay(20)
