@@ -1,7 +1,7 @@
 import random
 import pygame
 import sys
-from dé import *
+from de import *
 from case import Case
 from bouton import Bouton
 from joueur import Joueur
