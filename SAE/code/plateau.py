@@ -230,7 +230,7 @@ def plateau():
                     deplacement(getCase(j1.getX(), j1.getY()), j1)
                     creationPlateau(plateau)
                     j1.setMouvement(True)
-                    print("test1")
+                    print("tour joueur 1")
                     bouton.reset_clic()
                 elif j2.getMouvement() == False:
                     resultat_de = bouton.lancer_de()
@@ -238,13 +238,12 @@ def plateau():
                     deplacement(getCase(j2.getX(), j2.getY()), j2)
                     creationPlateau(plateau)
                     j2.setMouvement(True)
-                    print("test2")
+                    print("tour joueur 2")
                     bouton.reset_clic()
-            j1.setMouvement(False)
-            j2.setMouvement(False)
-            bouton.reset_clic()
+        j1.setMouvement(False)
+        j2.setMouvement(False)
             
-            pygame.display.flip()
+        pygame.display.flip()
             
         # if not mobs:
             # Si la liste des monstres est vide, générez 5 monstres
